@@ -40,3 +40,20 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
+
+# Archivos de dependencias (muy importante)
+/node_modules
+
+# Archivos de compilación de Angular
+/dist
+/.angular/cache
+
+# Archivos del sistema operativo y editores
+.DS_Store
+Thumbs.db
+/.vscode
