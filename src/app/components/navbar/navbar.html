@@ -1,14 +1,15 @@
-<nav>
-  <a href="/home">Inicio</a>
-  <a href="#sistemas">
-    <!-- <img class="logo-neto" src="assets/img/logoNetoDI.png" alt="logo-neto" border="0"> -->
-  </a>
-  <a>
-  @if (authService.user$ | async) {
-    <button (click)="logout()">
-      Cerrar Sesión
-    </button>
-  }
-  </a>
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top container" style="height: 8%; transition: top 0.3s;">
+  <div class="container-fluid">
+    <a class="btn btn-outline-light me-3" href="/home">Inicio</a>
+    <a class="d-flex align-items-center" href="/home">
+      <img src="assets/img/logoNetoDI.png" alt="logo-neto" style="max-width: 120px;">
+    </a>
+    <div class="d-flex align-items-center">
+      @if (authService.user$ | async) {
+      <button (click)="logout()" class="btn btn-outline-light ms-3">
+        Cerrar Sesión
+      </button>
+      }
+    </div>
+  </div>
 </nav>
-

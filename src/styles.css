@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+/* En: src/styles.css */
+
+/* Asegura que el fondo cubra toda la pantalla */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  /* Aquí va tu fondo de pantalla */
+  background-image: url('assets/img/backgroundMorada.png'); /* Asegúrate de que la ruta sea correcta */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Mantiene el fondo estático al hacer scroll */
+  
+  /* Otros estilos globales que quieras */
+  font-family: 'Segoe UI', sans-serif;
+  padding-top: 60px; /* Espacio para el nav fijo */
+}
+
+/* Aquí pueden ir otras variables y estilos globales */
+:root {
+    --primary-color: #4b49b3;
+  --secondary-color: #2c3e50;
+  --background-color: #f4f7f9;
+  --text-color: #ffffff;
+}

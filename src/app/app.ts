@@ -2,6 +2,8 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
+import * as AOS from 'aos';
+import 'aos/dist/aos.css';
 
 @Component({
   selector: 'app-root',
@@ -12,4 +14,9 @@ import { Navbar } from './components/navbar/navbar';
 })
 export class App {
   protected readonly title = signal('espacio-digital-neto');
+
+  constructor() {
+    AOS.init();
+  }
+  
 }
