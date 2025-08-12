@@ -1,8 +1,84 @@
-<div class="google-login-box">
+<!-- <div class="google-login-box">
   <h2>Portal Digital</h2>
   <p>Inicia sesión con tu cuenta de Tiendas Neto.</p>
   <button (click)="login()">
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo"/>
     Iniciar Sesión con Google
   </button>
-</div>
+</div> -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Fondo con líneas sutiles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="pt-0">
+  <!-- Fondo con líneas tipo "neón" y movimiento MUY sutil -->
+  <svg class="ribbons" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="var(--accent1)" />
+        <stop offset="50%" stop-color="var(--accent2)" />
+        <stop offset="100%" stop-color="var(--accent3)" />
+      </linearGradient>
+    </defs>
+    <g>
+      <path class="ribbon-path thick" stroke="url(#grad1)" d="M -20 70 C 10 60, 30 40, 60 50 S 120 70, 140 40" />
+      <path class="ribbon-path thin" stroke="url(#grad1)" d="M -10 82 C 15 74, 45 70, 70 78 S 120 92, 130 84" />
+      <path class="ribbon-path" stroke="url(#grad1)" d="M -15 38 C 15 22, 40 18, 68 30 S 115 52, 135 35" />
+    </g>
+    <g>
+      <path class="ribbon-path" stroke="url(#grad1)" d="M -25 56 C 5 48, 40 46, 68 50 S 110 60, 135 58" />
+      <path class="ribbon-path thin" stroke="url(#grad1)" d="M -30 24 C 2 16, 28 10, 62 16 S 118 26, 148 12" />
+    </g>
+  </svg>
+  <div class="stars"></div>
+  <main class="wrap">
+    <section class="card" role="dialog" aria-labelledby="title">
+      <h1 id="title">Login</h1>
+      <form onsubmit="event.preventDefault(); alert('Simulando login');">
+        <div class="field">
+          <label for="user" style="font-size:14px;color:var(--muted)">Username</label>
+          <input id="user" class="input" type="text" placeholder="Username" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="pass" style="font-size:14px;color:var(--muted)">Password</label>
+          <input id="pass" class="input" type="password" placeholder="Password" autocomplete="current-password"
+            required>
+        </div>
+        <div class="row">
+          <label class="check"><input type="checkbox"> Remember me</label>
+          <a class="link" href="#">Forgot Password?</a>
+        </div>
+        <button class="btn" type="submit">Login</button>
+        <p>Inicia sesión con tu cuenta de Tiendas Neto.</p>
+        <button class="btn" (click)="login()">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo" />
+          Iniciar Sesión con Google
+        </button>
+        <div class="meta">¿No tienes cuenta? <a href="#">Register</a></div>
+      </form>
+    </section>
+  </main>
+  <script>
+    // Ajusta la sutilidad del movimiento: menor = más suave
+    const SPEED = 0.12; // píxeles por frame de la "corriente" del trazo
+    const paths = document.querySelectorAll('.ribbon-path');
+    let offset = 0;
+    function tick() {
+      offset -= SPEED;
+      paths.forEach(p => p.style.strokeDashoffset = offset);
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  </script>
+</body>
+
+</html>

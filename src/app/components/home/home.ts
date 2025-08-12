@@ -1,15 +1,33 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importante para *ngIf y async
+import { Component, inject, OnDestroy, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/authService';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
-export class Home {
- authService = inject(AuthService);
-  // Exponemos el observable del usuario al template
-  user$ = this.authService.user$; 
+export class Home implements AfterViewInit, OnDestroy {
+  authService = inject(AuthService);
+  user$ = this.authService.user$;
+
+  private revealOnScroll = () => {
+    const revealSections = document.querySelectorAll('.reveal-section');
+    revealSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 80) {
+        section.classList.add('visible');
+      }
+    });
+  };
+
+  ngAfterViewInit() {
+    window.addEventListener('scroll', this.revealOnScroll);
+    this.revealOnScroll();
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.revealOnScroll);
+  }
 }

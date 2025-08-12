@@ -2,27 +2,28 @@
 /* En: src/styles.css */
 
 /* Asegura que el fondo cubra toda la pantalla */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
 
 body {
   /* Aquí va tu fondo de pantalla */
-  background-image: url('assets/img/backgroundMorada.png'); /* Asegúrate de que la ruta sea correcta */
+  /* background-image: url('assets/img/bgMoradaClaro.png'); */
+  background-image: url('assets/img/bgMoradoOscuro.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Mantiene el fondo estático al hacer scroll */
-  
-  /* Otros estilos globales que quieras */
+  background-attachment: fixed;
   font-family: 'Segoe UI', sans-serif;
-  padding-top: 60px; /* Espacio para el nav fijo */
+  padding-top: 60px;
 }
 
 /* Aquí pueden ir otras variables y estilos globales */
 :root {
-    --primary-color: #4b49b3;
+  --primary-color: #4b49b3;
   --secondary-color: #2c3e50;
   --background-color: #f4f7f9;
   --text-color: #ffffff;
+
 }
