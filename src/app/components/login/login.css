@@ -71,12 +71,6 @@ svg {
   animation-duration: 18s
 }
 
-@keyframes flow {
-  to {
-    stroke-dashoffset: -2400
-  }
-}
-
 /* sutil vaivén del conjunto */
 .ribbons g {
   animation: drift 22s ease-in-out infinite;
@@ -89,6 +83,14 @@ svg {
 .ribbons g:nth-child(3) {
   animation-duration: 34s
 }
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -2400
+  }
+}
+
+
 
 @keyframes drift {
 

@@ -1,1 +1,19 @@
-{}
+{
+  "projects": {
+    "default": "espacio-digital-tiendas-neto"
+  },
+  "hosting": {
+     "public": "dist/espacio-digital-neto/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

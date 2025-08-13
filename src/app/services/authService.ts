@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut } from '@angular/fire/auth';
+import { Auth, authState, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -9,31 +9,34 @@ export class AuthService {
   private auth: Auth = inject(Auth);
   private router: Router = inject(Router);
 
-  // Observable que nos dirá en tiempo real si hay un usuario o no
   readonly user$ = authState(this.auth);
 
-  // Función para iniciar sesión con Google
-  async loginWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    // Restringimos el acceso solo al dominio de la empresa
-    provider.setCustomParameters({ 'hd': 'tiendasneto.com' });
-
+  // NUEVA FUNCIÓN DE LOGIN CON CORREO
+  async loginWithEmail(email: string, password: string): Promise<string | null> {
     try {
-      const userCredential = await signInWithPopup(this.auth, provider);
-      // Si el login es exitoso, navegamos a la página principal
-      this.router.navigate(['/home']);
-      return userCredential;
-    } catch (error) {
-      console.error("Error en el inicio de sesión con Google", error);
-      return null;
+      await signInWithEmailAndPassword(this.auth, email, password);
+      return null; // No hay error
+    } catch (error: any) {
+      return error.code; // Devuelve el código de error
     }
   }
 
-  // Función para cerrar sesión
+  // NUEVA FUNCIÓN DE REGISTRO CON CORREO Y VERIFICACIÓN
+  async registerWithEmail(email: string, password: string): Promise<string | null> {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      // Enviamos el correo de verificación después de crear el usuario
+      await sendEmailVerification(userCredential.user);
+      await signOut(this.auth); // Deslogueamos al usuario para forzar la verificación
+      return null; // No hay error
+    } catch (error: any) {
+      return error.code; // Devuelve el código de error
+    }
+  }
+
   async logout() {
     try {
       await signOut(this.auth);
-      // Al cerrar sesión, navegamos de vuelta al login
       this.router.navigate(['/login']);
     } catch (error) {
       console.error("Error al cerrar sesión", error);
