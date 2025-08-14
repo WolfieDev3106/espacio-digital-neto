@@ -264,3 +264,32 @@ h1 {
     align-items: flex-start
   }
 }
+
+.message-error {
+  color: var(--accent1); /* O el color de error que prefieras */
+  background-color: #ff000020;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.message-success {
+  color: #00a878; /* O el color de éxito que prefieras */
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent1); /* O el color de tus enlaces */
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+}

@@ -1,7 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
+import { AuthService } from './services/authService'; // Ajusta la ruta
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +15,13 @@ import { Navbar } from './components/navbar/navbar';
 })
 export class App {
   protected readonly title = signal('espacio-digital-neto');
+ private authService = inject(AuthService);
 
-  constructor() {
+  showNavbar$: Observable<boolean>;
+   constructor() {
+    this.showNavbar$ = this.authService.user$.pipe(
+      map(user => user ? user.emailVerified : false)
+    );
   }
   
 }

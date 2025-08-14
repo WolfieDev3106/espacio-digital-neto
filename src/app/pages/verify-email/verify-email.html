@@ -1,0 +1,42 @@
+<main class="verify-container">
+  <section class="card">
+    <div class="icon-container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="64"
+        height="64"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon"
+      >
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    </div>
+
+    <h1>¡Casi listo! Verifica tu correo</h1>
+    
+    <p class="subtitle">
+      Hemos enviado un enlace de activación a 
+      <strong>{{ userEmail || 'tu correo' }}</strong>.
+      Por favor, revisa tu bandeja de entrada para continuar.
+    </p>
+
+    <div class="actions">
+      <button class="btn" (click)="resendVerification()" [disabled]="isButtonDisabled">
+        {{ buttonText }}
+      </button>
+      <button class="btn secondary" (click)="logout()">
+        Cerrar Sesión
+      </button>
+    </div>
+
+    <div *ngIf="message" class="message-info">
+      {{ message }}
+    </div>
+  </section>
+</main>

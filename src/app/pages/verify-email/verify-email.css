@@ -1,0 +1,121 @@
+/* --- Variables de Color (ajusta a los colores de tu marca) --- */
+:host {
+  --primary-color: #007bff; /* Un azul vibrante */
+  --secondary-color: #6c757d; /* Un gris sutil */
+  --background-color: #f4f7f6; /* Fondo de la página */
+  --card-background: #ffffff; /* Fondo de la tarjeta */
+  --text-color: #333333; /* Texto principal */
+  --text-muted: #6c757d; /* Texto secundario o subtítulos */
+  --success-color: #28a745; /* Color para mensajes de éxito */
+  --border-radius: 8px;
+}
+
+/* --- Contenedor Principal y Centrado --- */
+/*
+  Usamos Flexbox para centrar la tarjeta vertical y horizontalmente.
+  min-height: 100vh asegura que el contenedor ocupe toda la altura de la pantalla.
+*/
+.verify-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  padding: 1rem;
+}
+
+/* --- Estilo de la Tarjeta (Card) --- */
+.card {
+  background-color: var(--card-background);
+  padding: 2.5rem 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+}
+
+/* --- Icono SVG --- */
+.icon-container {
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  color: var(--primary-color);
+}
+
+/* --- Tipografía --- */
+h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 0.75rem 0;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+strong {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+/* --- Botones y Acciones --- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Espacio entre los botones */
+}
+
+.btn {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+/* Botón primario */
+.btn:not(.secondary) {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn:not(.secondary):hover:not(:disabled) {
+  background-color: #0056b3; /* Un azul más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Botón secundario */
+.btn.secondary {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 1px solid #ccc;
+}
+
+.btn.secondary:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #bbb;
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* --- Mensaje de Información --- */
+.message-info {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #e9f7ef;
+  color: var(--success-color);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+}

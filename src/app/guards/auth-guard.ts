@@ -4,21 +4,26 @@ import { AuthService } from '../services/authService';
 import { map, take } from 'rxjs/operators';
 
 export const authGuard: CanActivateFn = (route, state) => {
- const authService = inject(AuthService);
+  const authService = inject(AuthService);
   const router = inject(Router);
 
-return authService.user$.pipe(
-  take(1),
-  map(user => {
-    // Si existe un usuario Y su correo está verificado, permitimos el acceso
-    if (user && user.emailVerified) {
-      return true;
-    }
+  return authService.user$.pipe(
+    take(1),
+    map(user => {
+      // 1. Usuario existe y está verificado -> Permitir acceso
+      if (user && user.emailVerified) {
+        return true;
+      }
+      
+      // 2. Usuario existe pero NO está verificado -> Redirigir a la página de verificación
+      if (user && !user.emailVerified) {
+        router.navigate(['/verify-email']);
+        return false;
+      }
 
-    // Si no, lo mandamos al login
-    // Podríamos mostrar un mensaje de "verifica tu correo" en la página de login
-    router.navigate(['/login']);
-    return false;
-  })
-);
+      // 3. No hay usuario -> Redirigir a login
+      router.navigate(['/login']);
+      return false;
+    })
+  );
 };
