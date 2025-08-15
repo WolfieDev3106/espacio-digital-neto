@@ -1,26 +1,43 @@
-<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top container"
-  style="height: 8%; transition: top 0.3s;">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom-dark pb-0">
 
-    @if (authService.user$ | async) {
+  <div class="container-fluid">
+
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="/home">
+        <img src="assets/img/logoNetoDI.png" alt="logo-neto" style="height: 50px; width: auto;" />
+      </a>
+      
+        <!-- @if (authService.user$ | async) {
       <a class="btn btn-outline-light me-3" href="/home">Inicio</a>
     } @else {
       <span></span>
-    }
+    } -->
 
-    <a class="d-flex align-items-center mx-auto" href="/home">
-      <img src="assets/img/logoNetoDI.png" alt="logo-neto"
-        style="height:80px; width:auto; max-width:120px; object-fit:contain;" />
-    </a>
+    <!--  @if (authService.user$ | async) {
+       <ul class="navbar-nav flex-row gap-3 ms-4">
+        <li class="nav-item">
+          <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" fragment="#sistemas" routerLinkActive="active">Sistemas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ia" routerLinkActive="active">Agentes IA´s</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/proyectos" routerLinkActive="active">Slack</a>
+        </li>
+      </ul> 
+      }-->
+    </div>
 
     <div class="d-flex align-items-center">
       @if (authService.user$ | async) {
-        <button (click)="logout()" class="btn btn-outline-light ms-3">
-          Cerrar Sesión
-        </button>
-      } @else {
-        <span></span>
+      <button (click)="logout()" class="btn btn-outline-light">
+        Cerrar Sesión
+      </button>
       }
     </div>
+
   </div>
 </nav>

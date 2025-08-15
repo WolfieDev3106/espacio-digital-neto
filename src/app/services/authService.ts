@@ -10,7 +10,8 @@ import {
   signInWithPopup,
   browserLocalPersistence,
   browserSessionPersistence,
-  setPersistence
+  setPersistence,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -24,20 +25,26 @@ export class AuthService {
   readonly user$ = authState(this.auth);
 
   // NUEVA FUNCIÓN DE LOGIN CON CORREO
- async loginWithEmail(email: string, password: string, rememberMe: boolean): Promise<string | null> {
+  async loginWithEmail(
+    email: string,
+    password: string,
+    rememberMe: boolean
+  ): Promise<string | null> {
     try {
       // Establecer la persistencia ANTES de iniciar sesión
-      const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+      const persistence = rememberMe
+        ? browserLocalPersistence
+        : browserSessionPersistence;
       await setPersistence(this.auth, persistence);
-      
+
       await signInWithEmailAndPassword(this.auth, email, password);
       return null;
     } catch (error: any) {
       return error.code;
     }
-}
+  }
 
- async loginWithGoogle() {
+  async loginWithGoogle() {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ hd: 'tiendasneto.com' });
 
@@ -81,16 +88,26 @@ export class AuthService {
   }
 
   async resendVerificationEmail(): Promise<string | null> {
-  const user = this.auth.currentUser;
-  if (user) {
+    const user = this.auth.currentUser;
+    if (user) {
+      try {
+        await sendEmailVerification(user);
+        return null; // Éxito
+      } catch (error: any) {
+        console.error('Error reenviando la verificación', error);
+        return error.code; // Fracaso
+      }
+    }
+    return 'auth/no-current-user'; // No hay usuario para enviar
+  }
+
+  async sendPasswordReset(email: string): Promise<string | null> {
     try {
-      await sendEmailVerification(user);
+      await sendPasswordResetEmail(this.auth, email);
       return null; // Éxito
     } catch (error: any) {
-      console.error('Error reenviando la verificación', error);
-      return error.code; // Fracaso
+      console.error('Error enviando correo de restablecimiento', error);
+      return error.code; // Devuelve el código de error
     }
   }
-  return 'auth/no-current-user'; // No hay usuario para enviar
-}
 }

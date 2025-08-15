@@ -266,7 +266,7 @@ h1 {
 }
 
 .message-error {
-  color: var(--accent1); /* O el color de error que prefieras */
+  color: white; /* O el color de error que prefieras */
   background-color: #ff000020;
   padding: 10px;
   border-radius: 5px;
@@ -286,10 +286,24 @@ h1 {
 .link-button {
   background: none;
   border: none;
-  color: var(--accent1); /* O el color de tus enlaces */
+  color: white; /* O el color de tus enlaces */
   cursor: pointer;
   padding: 0;
   font-family: inherit;
   font-size: inherit;
   text-decoration: underline;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem; /* Un poco más de espacio */
+}
+
+.extra-options {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los lados */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
 }
