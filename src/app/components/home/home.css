@@ -147,47 +147,6 @@
   object-fit: contain;
 }
 
-.card-content,
-.card-body {
-  padding: 8px 10px;
-  /* Reduce el padding interno */
-}
-
-.card-content h3 {
-  margin: 0 0 10px;
-  color: var(--secondary-color);
-}
-
-.card-content p,
-.card-content blockquote {
-  color: #555;
-  font-size: 0.95em;
-  margin: 5px 0;
-  flex-grow: 1;
-}
-
-.card-content blockquote {
-  font-style: italic;
-  border-left: 3px solid var(--accent-color);
-  padding-left: 15px;
-}
-
-.card-content a.button {
-  display: block;
-  margin-top: auto;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 12px 20px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.card-content a.button:hover {
-  background-color: #2a7ab6;
-}
 
 /* === DETALLES DE AGENTE === */
 .agent-details {
@@ -219,26 +178,6 @@
 }
 
 
-#agentes .card {
-  min-height: 100%;
-  /* Ocupa todo el alto de la columna */
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  padding-top: 0;
-
-}
-
-#agentes .card-img-top-agent {
-  flex: 1 1 auto;
-  /* Hace que la imagen crezca y ocupe espacio */
-  max-height: 480px;
-  /* Ajusta según el tamaño que desees */
-  width: 100%;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
 #IA .card-img-top-agent {
   flex: 1 1 auto;
   /* Hace que la imagen crezca y ocupe espacio */
@@ -249,10 +188,10 @@
   margin-bottom: 10px;
 }
 
-#agentes .card-body {
+/* #agentes .card-body {
   flex: 0 0 auto;
   padding-bottom: 16px;
-}
+} */
 
 .contact-images img {
   max-width: 50%;
@@ -268,33 +207,368 @@
 .section-con-fondo {
   position: relative;
   background-image: url('../../../assets/img/visualFondo.png');
-  background-size: cover;         /* Hace que la imagen cubra toda la sección */
-  background-repeat: no-repeat;   /* Evita que se repita */
-  background-position: center;    /* Centra la imagen */
-  min-height: 100vh;              /* Opcional: asegura que la sección tenga al menos el alto de la ventana */
+  background-size: cover;
+  /* Hace que la imagen cubra toda la sección */
+  background-repeat: no-repeat;
+  /* Evita que se repita */
+  background-position: center;
+  /* Centra la imagen */
+  min-height: 100vh;
+  /* Opcional: asegura que la sección tenga al menos el alto de la ventana */
   width: 100%;
 }
-
-/* .section-con-fondo::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('https://i.ibb.co/nq318XrB/visuales-pagina.png');
-  background-attachment: scroll;
-  z-index: -1; 
-}*/
 
 .reveal-section {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.4, 0, .2, 1);
   will-change: opacity, transform;
 }
 
 .reveal-section.visible {
   opacity: 1;
   transform: none;
+}
+
+/* === CARRUSEL 3D EXCLUSIVO PARA #agentes === */
+#agentes .carousel-agentes {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 60px 0;              /* reducido un poco el padding */
+  min-height: 900px;            /* altura aumentada para el contenedor más grande */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  z-index: 1;
+}
+
+#agentes .gallery-agentes {
+  position: relative;
+  width: 100%;
+  height: 480px;               /* altura aumentada */
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#agentes .gallery-agentes li {
+  list-style: none;
+  position: absolute;
+  width: 300px;                /* ancho aumentado significativamente */
+  height: 450px;               /* altura aumentada significativamente */
+  opacity: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: agentesSlide 15s linear infinite, agentesFocus 15s linear infinite;
+  animation-delay: calc((15s / 3) * (var(--i) - 1));
+}
+
+#agentes .agent-slide {
+  /* background: rgba(255, 255, 255, 0.95); */
+  border-radius: 16px;
+  /* padding: 20px; */
+  /* box-shadow: 
+    0 8px 20px rgba(0,0,0,0.15),
+    0 2px 8px rgba(0,0,0,0.05); */
+  text-align: center;
+  /* overflow: hidden; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#agentes .agent-slide img {
+  width: 100%;
+  height: auto;                /* altura automática para mantener proporciones */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#agentes .agent-slide h3 {
+  font-size: 1.3rem;
+  margin: 10px 0;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+#agentes .agent-slide blockquote {
+ font-style: italic;
+  border-left: 3px solid var(--accent-color);
+  padding-left: 15px;
+}
+
+/* Animaciones del carrusel horizontal */
+@keyframes agentesSlide {
+  0% {
+    left: 100%;                 /* empieza desde la derecha */
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: -350px;              /* sale por la izquierda (ajustado para el nuevo tamaño) */
+    opacity: 0;
+  }
+}
+
+@keyframes agentesFocus {
+  0%, 15%, 85%, 100% {
+    transform: translateY(-50%) scale(1) rotateY(0deg);
+    filter: grayscale(80%);
+    z-index: 1;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.15) rotateY(0deg);
+    filter: grayscale(0);
+    z-index: 10;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #agentes .carousel-agentes {
+    min-height: 450px;
+    padding: 60px 10px;
+  }
+  
+  #agentes .gallery-agentes {
+    height: 350px;
+  }
+  
+  #agentes .gallery-agentes li {
+    width: 220px;
+    height: 320px;
+  }
+  
+  #agentes .agent-slide {
+    padding: 15px;
+  }
+  
+  #agentes .agent-slide img {
+    height: 160px;
+  }
+  
+  #agentes .agent-slide h3 {
+    font-size: 1.2rem;
+  }
+  
+  #agentes .agent-slide blockquote {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #agentes .carousel-agentes {
+    min-height: 400px;
+    padding: 40px 5px;
+  }
+  
+  #agentes .gallery-agentes {
+    height: 300px;
+  }
+  
+  #agentes .gallery-agentes li {
+    width: 200px;
+    height: 280px;
+  }
+  
+  #agentes .agent-slide img {
+    height: 140px;
+  }
+}
+
+#agentes .card-content{
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.18);
+   border-top: none; /* 🔑 elimina borde doble entre img y contenido */
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  padding: 12px 14px;
+  position: relative;
+  transform: none !important;
+  backface-visibility: hidden;
+}
+
+#agentes .card-content h3{
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+#agentes .card-content .agent-details{
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  font-size: .95rem;
+   display: block;
+}
+
+#agentes .card-content .agent-details li{ margin-bottom: 6px; }
+
+#agentes .card-content blockquote{
+  font-style: italic;
+  margin: 8px 0 0 0;
+  border-left: 3px solid var(--accent-color, #fff);
+  padding-left: 12px;
+  opacity: .95;
+}
+
+#agentes .gallery-agentes { height: 560px; }
+#agentes .gallery-agentes li { height: 520px; }
+
+#agentes .agent-details li {
+  background: #101114;
+  all: unset;              /* borra cualquier estilo heredado raro */
+  display: block;          /* que sean bloques normales */
+  margin-bottom: 6px;      /* espacio entre cada item */
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #fff;             /* asegura el contraste */
+}
+
+
+
+
+/* #agentes .gallery-agentes li:nth-child(1):hover {
+  box-shadow: 0 0 25px #247aff, 0 0 45px #247affaa;
+}
+
+#agentes .gallery-agentes li:nth-child(2):hover {
+  box-shadow: 0 0 25px #1185fd, 0 0 45px #1185fdaa;
+}
+
+#agentes .gallery-agentes li:nth-child(3):hover {
+  box-shadow: 0 0 25px #778cef, 0 0 45px #778cefaa;
+}
+
+#agentes .gallery-agentes li:nth-child(4):hover {
+  box-shadow: 0 0 25px #ea5166, 0 0 45px #ea5166aa;
+} */
+
+/* Contenedor red neuronal */
+#sistemas .ia-network {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Nodo IA circular */
+#sistemas .ia-node {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: #101114;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.6s ease, box-shadow 0.8s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Glow IA animado */
+#sistemas .ia-node::before {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 220%;
+  background: conic-gradient(#32B8FF, #6C62FF, #DE3CFF, #32B8FF);
+  animation: spin 10s linear infinite;
+  opacity: 0.35;
+}
+
+#sistemas .ia-node::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  background: #101114;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Contenido del frente (logo + título) */
+.ia-front, .ia-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.ia-front {
+  color: #fff;
+}
+.ia-front img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+.ia-front h5 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Contenido trasero (detalle al hover) */
+.ia-back {
+  color: #32B8FF;
+  font-size: 0.9rem;
+  opacity: 0;
+}
+
+/* Hover: cambia glow y muestra detalle */
+#sistemas .ia-node:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 30px #32B8FF, 0 0 60px #6C62FF, 0 0 90px #DE3CFF;
+}
+
+#sistemas .ia-node:hover .ia-front { opacity: 0; }
+#sistemas .ia-node:hover .ia-back { opacity: 1; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Líneas de conexión SVG */
+.ia-connections {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ia-connections line {
+  stroke: #32B8FF;
+  stroke-width: 2;
+  opacity: 0.5;
+  stroke-dasharray: 6;
+  animation: dash 4s linear infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -20; }
 }
